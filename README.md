@@ -2,7 +2,7 @@
 
 # DEEF-Lite-Image-Viewer
 
-A simple App for viewing images on your Windows PC, written in PyQt5 + PyQt-Fluent-Widgets.
+A simple App for viewing images on your Windows PC, written in [PyQt5](https://www.riverbankcomputing.com/software/pyqt/intro) + [PyQt Fluent Widgets](https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
 
 Supported image formats: 
 
