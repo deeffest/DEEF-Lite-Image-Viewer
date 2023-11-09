@@ -13,8 +13,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 supported_formats = [str(fmt, 'utf-8') for fmt in QImageReader.supportedImageFormats()]
 filter_ = "Images ({})".format(' '.join('*.' + fmt for fmt in supported_formats))
 
-print(supported_formats)
-
 def is_image_file(file_path):
     _, file_extension = os.path.splitext(file_path)
     file_extension = file_extension[1:] 
