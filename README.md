@@ -1,4 +1,4 @@
-![icon-0](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/94068fee-48a9-45ea-b8cc-6a66f9564b3c)
+![icon-0-1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/86cf7235-6216-4ae6-a89f-bfc56a80795f)
 
 # DEEF-Lite-Image-Viewer
 
