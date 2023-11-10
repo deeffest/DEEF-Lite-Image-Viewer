@@ -43,4 +43,4 @@ It's simple!
 
 ---
 
-Now, whenever you double-click on an image file, Windows 10 will open it using DLIViewer.exe by default!
+Now, whenever you double-click on an image file, Windows will open it using DLIViewer.exe by default!
