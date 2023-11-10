@@ -10,7 +10,7 @@ Supported image formats:
 
 # Screenshots
 
-![DLIVIewer_DDwXsxHNHZ](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/4f3bef7e-a720-470d-87c1-0c8066ba711b)
+![image](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/d7a61821-3217-499a-afc0-19adfc66c26e)
 
 # Download
 
