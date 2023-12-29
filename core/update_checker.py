@@ -10,29 +10,21 @@ class UpdateChecker(QThread):
     def __init__(
         self, 
         version, 
-        url_version, 
-        url_download, 
+        url, 
         parent=None
         ):
         super().__init__(parent)
-        self.url_version = url_version
-        self.url_download = url_download
+        self.url = url
         self.app_version = version
 
     def run(self):
-        try:
-            response = requests.get(self.url_version)
-            page = BeautifulSoup(response.content, "html5lib")
-            item_version = page.find("span", class_="C9DxTc")
+        response = requests.get(self.url)
+        item_version = response.json()["name"]
+        item_download = response.json().get("html_url") 
 
-            response_download = requests.get(self.url_download)
-            page_download = BeautifulSoup(
-                response_download.content, "html5lib")
-            item_download = page_download.find("span", class_="C9DxTc")
-        except:
-            pass
+        print(item_version, item_download)
 
-        if item_version is not None and item_version.text != self.app_version:
-            self.update_available.emit(item_download.text)
+        if item_version is not None and item_version != self.app_version:
+            self.update_available.emit(item_download)
         else:
             self.no_update_found.emit()

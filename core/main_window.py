@@ -127,13 +127,10 @@ class Window(MSFluentWindow):
             self.homeInterface.open_image(file_path)
 
     def starter_check_updates(self, first_update):
-        url_version = (
-            'https://sites.google.com/view/deeffest-updates/dliviewer'
+        url = (
+            'https://api.github.com/repos/deeffest/DEEF-Lite-Image-Viewer/releases/latest'
         )
-        url_download = (
-            'https://sites.google.com/view/deeffest-updates/dliviewer/dliviewer-url'
-        )
-        self.update_checker_thread = UpdateChecker(self.app_version, url_version, url_download, parent=self)
+        self.update_checker_thread = UpdateChecker(self.app_version, url, parent=self)
         self.update_checker_thread.update_available.connect(self.msg_box_new_update)
         if first_update == False:
             self.update_checker_thread.no_update_found.connect(self.no_update_found_dialog)
