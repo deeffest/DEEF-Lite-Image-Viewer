@@ -1,3 +1,4 @@
+#main.py
 from core.main_window import Window
 from PyQt5.QtGui import QImageReader
 from PyQt5.QtWidgets import QApplication
@@ -7,7 +8,7 @@ import sys
 from qfluentwidgets import setTheme, setThemeColor, Theme
 
 name = "DEEF Lite Image Viewer"
-version = "1.0"
+version = "1.2"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 supported_formats = [str(fmt, 'utf-8') for fmt in QImageReader.supportedImageFormats()]
@@ -28,6 +29,7 @@ if __name__ == '__main__':
     current_scene_theme = settings.value("current_scene_theme", "dark")
     current_window_size = settings.value("current_window_size", "true")
     current_check_updates = settings.value("current_check_updates", "true")
+    current_last_opened_folder = settings.value("current_last_opened_folder", current_dir)
 
     image_path = sys.argv[1] if len(sys.argv) > 1 and is_image_file(sys.argv[1]) else None
 
@@ -45,6 +47,7 @@ if __name__ == '__main__':
         filter_, 
         version,
         current_check_updates,
+        current_last_opened_folder,
         supported_formats,
         image_path
     )
