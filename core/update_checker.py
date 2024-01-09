@@ -22,9 +22,7 @@ class UpdateChecker(QThread):
         item_version = response.json()["name"]
         item_download = response.json().get("html_url") 
 
-        print(item_version, item_download)
-
-        if item_version is not None and item_version != self.app_version:
+        if item_version != self.app_version:
             self.update_available.emit(item_download)
         else:
             self.no_update_found.emit()

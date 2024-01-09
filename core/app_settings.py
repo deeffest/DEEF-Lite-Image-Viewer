@@ -77,8 +77,13 @@ class AppSettings(QFrame):
 
         if self.current_app_window_size == "true":
             self.SwitchButton_3.setChecked(True)
+        else:
+            self.SwitchButton_3.setChecked(False)
+
         if self.current_app_check_updates == "true":
             self.SwitchButton_4.setChecked(True)
+        else:
+            self.SwitchButton_4.setChecked(False)
 
     def SearchUpdates(self):
         self.PushButton.setEnabled(False)
@@ -100,14 +105,18 @@ class AppSettings(QFrame):
     def onSwitchButton3Clicked(self):
         if self.current_app_window_size == "true":
             self.app_settings.setValue("current_window_size", "false")
+            self.current_app_window_size = "false"
         else:
             self.app_settings.setValue("current_window_size", "true")
+            self.current_app_window_size = "true"
 
     def onSwitchButton4Clicked(self):
         if self.current_app_check_updates == "true":
             self.app_settings.setValue("current_check_updates", "false")
+            self.current_app_check_updates = "false"
         else:
             self.app_settings.setValue("current_check_updates", "true")
+            self.current_app_check_updates = "true"
 
     def setAppColorTheme(self, index):
         setThemeColor(self.ComboBox_2.itemText(index))

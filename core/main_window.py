@@ -30,11 +30,14 @@ class Window(MSFluentWindow):
         filter_, 
         version,
         current_check_updates,
+        current_last_opened_folder,
         supported_formats,
         image_path=None, 
         parent=None
         ):
         super().__init__(parent=parent)
+
+        self.show()
 
         self.app_name = name
         self.current_app_dir = current_dir
@@ -46,6 +49,7 @@ class Window(MSFluentWindow):
         self.image_extensions_filter = filter_
         self.app_version = version
         self.current_app_check_updates = current_check_updates
+        self.current_last_opened_folder = current_last_opened_folder
         self.supported_formats = supported_formats
 
         self._init_network_manager()
@@ -66,9 +70,9 @@ class Window(MSFluentWindow):
             self.restoreWindowSize()
 
         self._init_splash_screen()
+        self.raise_()
+        self.activateWindow()
         self._move_window_to_center()
-
-        self.show()
 
     def _move_window_to_center(self):
         desktop = QApplication.desktop().availableGeometry()
@@ -85,7 +89,7 @@ class Window(MSFluentWindow):
             self.app_name,
             self.supported_formats,
             parent=self
-        )
+        ) 
         self.homeInterface.setObjectName('Home')
         self.addSubInterface(self.homeInterface, FIF.HOME, 'Home')
 
@@ -108,7 +112,7 @@ class Window(MSFluentWindow):
 
     def _handle_image_opening(self, image_path):
         if image_path is None or not os.path.exists(image_path):
-            self.open_image_dialog()
+            pass
         else:
             self.homeInterface.open_image(image_path)
 
@@ -119,11 +123,17 @@ class Window(MSFluentWindow):
 
     def open_image_dialog(self):
         file_dlg = QFileDialog(self)
+        file_dlg.setDirectory(self.current_last_opened_folder)
         file_path, _ = file_dlg.getOpenFileName(
             self, "Open image", "", self.image_extensions_filter
         )
         
         if file_path:
+            self.current_last_opened_folder = os.path.dirname(file_path)
+            self.app_settings.setValue(
+                "current_last_opened_folder", 
+                self.current_last_opened_folder
+            )
             self.homeInterface.open_image(file_path)
 
     def starter_check_updates(self, first_update):
@@ -163,16 +173,20 @@ class Window(MSFluentWindow):
         no_update_msg.exec()
 
     def open_url_action(self):
-        custom_msg = WebImageMsgBox(self)
+        custom_msg = WebImageMsgBox(self.app_settings, self.current_last_opened_folder, self.homeInterface.current_image_path, self)
         if custom_msg.exec():
             url = custom_msg.urlLineEdit.text()
-            self.networkManager.get(QNetworkRequest(QUrl(url)))
+            if os.path.isfile(url):
+                self.homeInterface.open_image(url) 
+            else:
+                self.networkManager.get(QNetworkRequest(QUrl(url)))
 
     def handleNetworkData(self, networkReply):
         ioDevice = networkReply.readAll()
         image = QImage()
         image.loadFromData(ioDevice)
         pixmap = QPixmap.fromImage(image)
+        self.homeInterface.resetTransform()
         self.homeInterface.scene.clear()
         self.homeInterface.scene.addPixmap(pixmap)
         self.homeInterface.setSceneRect(0, 0, pixmap.width(), pixmap.height())
@@ -180,14 +194,13 @@ class Window(MSFluentWindow):
 
         url = networkReply.url().toString() 
         self.setWindowTitle(url)
-        self.homeInterface.current_image_path = "NoLocal"
+        self.homeInterface.current_image_path = url
 
     def restoreWindowSize(self):
         window_size = self.app_settings.value("window_size")
         if window_size is not None:
             self.resize(window_size)
 
-    def resizeEvent(self, event):
+    def closeEvent(self, event):
         self.app_settings.setValue("window_size", self.size())
-
-        return super().resizeEvent(event)
+        return super().closeEvent(event)
