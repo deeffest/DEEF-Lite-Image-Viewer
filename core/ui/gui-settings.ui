@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
-    <height>731</height>
+    <width>521</width>
+    <height>769</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,6 +36,18 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="HyperlinkButton" name="HyperlinkButton">
+       <property name="text">
+        <string>Bug Report</string>
+       </property>
+       <property name="url">
+        <url>
+         <string>https://forms.gle/rQP3LAjCFSJo3xBt8</string>
+        </url>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -60,11 +72,14 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>541</width>
+        <width>546</width>
         <height>707</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
        <item>
         <widget class="QFrame" name="frame_2">
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -441,7 +456,7 @@
              <item>
               <widget class="BodyLabel" name="BodyLabel_12">
                <property name="text">
-                <string>Created with ♥ by deeffest, 2023.</string>
+                <string>Created with ♥ by deeffest, 2023-2024.</string>
                </property>
               </widget>
              </item>
