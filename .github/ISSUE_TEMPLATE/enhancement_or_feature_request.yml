@@ -1,6 +1,6 @@
 ---
 name: Enhancement or feature request
-description: Suggest an enhancement or feature for Sublime Text core.
+description: Suggest an enhancement or feature for DLIViewer.
 body:
 - type: textarea
   attributes:
@@ -14,7 +14,7 @@ body:
 - type: textarea
   attributes:
     label: Preferred solution
-    description: "A description of what changes should be made to Sublime Text to solve the problem."
+    description: "A description of what changes should be made to DLIViewer to solve the problem."
   validations:
     required: true
 - type: textarea
