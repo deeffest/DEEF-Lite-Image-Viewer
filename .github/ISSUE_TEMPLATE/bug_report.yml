@@ -26,6 +26,6 @@ body:
 - type: input
   attributes:
     label: Operating system & version
-    placeholder: "Windows 10 21H2, Windows 11 23H2"
+    placeholder: "Windows 10 x64 1809"
   validations:
     required: true
