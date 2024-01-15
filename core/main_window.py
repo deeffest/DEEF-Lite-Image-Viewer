@@ -11,6 +11,7 @@ from qfluentwidgets import FluentIcon as FIF
 import webbrowser
 import sys
 import os
+import json
 
 from core.image_viewer import ImageViewer
 from core.app_settings import AppSettings
@@ -73,6 +74,7 @@ class Window(MSFluentWindow):
         self.raise_()
         self.activateWindow()
         self._move_window_to_center()
+        self._init_translations()
 
     def _move_window_to_center(self):
         desktop = QApplication.desktop().availableGeometry()
@@ -83,15 +85,35 @@ class Window(MSFluentWindow):
         self.splashScreen = SplashScreen(self.windowIcon(), self)
         self.splashScreen.setIconSize(QSize(102, 102))
 
+    def _delete_splash_screen(self):
+        self.splashScreen.finish()
+        if self.current_app_check_updates == "true":
+            self.starter_check_updates(first_update=True)
+
+    def _init_translations(self):
+        self.translations = self.load_translations(
+        f'{self.current_app_dir}/core/translations/translations.json'
+        )
+        self.current_language = self.app_settings.value("current_app_language", "en_EN")
+        self.tr = self.translations.get(
+            self.current_language, 
+            self.translations['en_US']
+        )
+
+    def load_translations(self, filepath):
+        with open(filepath, 'r', encoding='utf-8') as file:
+            return json.load(file)
+
     def _init_navigation(self, image_path=None):
         self.homeInterface = ImageViewer(
             self.current_app_scene_theme,
             self.app_name,
             self.supported_formats,
+            self.tr,
             parent=self
         ) 
         self.homeInterface.setObjectName('Home')
-        self.addSubInterface(self.homeInterface, FIF.HOME, 'Home')
+        self.addSubInterface(self.homeInterface, FIF.HOME, self.tr["8"])
 
         self.settingsInterface = AppSettings(
             self.current_app_dir, 
@@ -102,10 +124,11 @@ class Window(MSFluentWindow):
             self.current_app_check_updates,
             self.current_app_window_size,
             self.app_settings,
+            self.tr,
             parent=self
         )
         self.settingsInterface.setObjectName('Settings')
-        self.addSubInterface(self.settingsInterface, FIF.SETTING, 'Settings', None, NavigationItemPosition.BOTTOM) 
+        self.addSubInterface(self.settingsInterface, FIF.SETTING, self.tr["9"], None, NavigationItemPosition.BOTTOM) 
 
         self._handle_image_opening(image_path)
         self._delete_splash_screen()
@@ -116,16 +139,11 @@ class Window(MSFluentWindow):
         else:
             self.homeInterface.open_image(image_path)
 
-    def _delete_splash_screen(self):
-        self.splashScreen.finish()
-        if self.current_app_check_updates == "true":
-            self.starter_check_updates(first_update=True)
-
     def open_image_dialog(self):
         file_dlg = QFileDialog(self)
         file_dlg.setDirectory(self.current_last_opened_folder)
         file_path, _ = file_dlg.getOpenFileName(
-            self, "Open image", "", self.image_extensions_filter
+            self, self.tr["1"], "", self.image_extensions_filter
         )
         
         if file_path:
@@ -146,16 +164,16 @@ class Window(MSFluentWindow):
             self.update_checker_thread.no_update_found.connect(self.no_update_found_dialog)
         self.update_checker_thread.start()
 
-    def msg_box_new_update(self, item_download):
+    def msg_box_new_update(self, item_version, item_download, item_notes):
         self.settingsInterface.PushButton.setEnabled(True)
 
         update_available_msg = MessageBox(
-            f"New update is available!",
-            f"A new version of the program has been released! Download and install it soon!\n*You can always disable checking for updates in the settings.",
+            self.tr["6"],
+            self.tr["7"]+f"\n{item_notes}",
             self
         )
-        update_available_msg.yesButton.setText('Download')
-        update_available_msg.cancelButton.setText("Later")
+        update_available_msg.yesButton.setText(self.tr["4"])
+        update_available_msg.cancelButton.setText(self.tr["5"])
 
         if update_available_msg.exec():    
             webbrowser.open_new_tab(item_download)
@@ -165,15 +183,15 @@ class Window(MSFluentWindow):
         self.settingsInterface.PushButton.setEnabled(True)
         
         no_update_msg = MessageBox(
-            "No updates found",
-            "You are already using the latest version of the program.",
+            self.tr["2"],
+            self.tr["3"],
             self
         )
         no_update_msg.cancelButton.hide()
         no_update_msg.exec()
 
     def open_url_action(self):
-        custom_msg = WebImageMsgBox(self.app_settings, self.current_last_opened_folder, self.homeInterface.current_image_path, self)
+        custom_msg = WebImageMsgBox(self.app_settings, self.current_last_opened_folder, self.tr, self.homeInterface.current_image_path, self)
         if custom_msg.exec():
             url = custom_msg.urlLineEdit.text()
             if os.path.isfile(url):

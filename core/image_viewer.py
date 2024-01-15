@@ -24,6 +24,7 @@ class ImageViewer(QGraphicsView):
         current_scene_theme,
         name,
         supported_formats,
+        tr,
         image_path=None, 
         parent=None
         ):
@@ -33,6 +34,7 @@ class ImageViewer(QGraphicsView):
         self.current_app_scene_theme = current_scene_theme
         self.app_name = name
         self.supported_formats = tuple(supported_formats)
+        self.tr = tr
 
         self._init_attributes()
         self._init_content()
@@ -202,39 +204,39 @@ class ImageViewer(QGraphicsView):
     def contextMenuEvent(self, e):
         menu = RoundMenu(parent=self)
 
-        open_image_action = Action(FIF.PHOTO, 'Quickly Open File...', shortcut="Ctrl+Q")
+        open_image_action = Action(FIF.PHOTO, self.tr['10'], shortcut="Ctrl+Q")
         open_image_action.triggered.connect(self.window.open_image_dialog)
         menu.addAction(open_image_action)
 
-        open_url_action = Action(FIF.LINK, 'Open File/URL...', shortcut="Ctrl+O")
+        open_url_action = Action(FIF.LINK, self.tr['11'], shortcut="Ctrl+O")
         open_url_action.triggered.connect(self.window.open_url_action)
         menu.addAction(open_url_action)
 
         menu.addSeparator()
 
-        copy_action = Action(FIF.COPY, 'Copy', shortcut="Ctrl+C")
+        copy_action = Action(FIF.COPY, self.tr['12'], shortcut="Ctrl+C")
         copy_action.triggered.connect(self.copy)
         menu.addAction(copy_action)
 
-        paste_action = Action(FIF.PASTE, 'Paste', shortcut="Ctrl+V")
+        paste_action = Action(FIF.PASTE, self.tr['13'], shortcut="Ctrl+V")
         paste_action.triggered.connect(self.paste)
         menu.addAction(paste_action)
 
-        cut_action = Action(FIF.CUT, 'Cut', shortcut="Ctrl+X")
+        cut_action = Action(FIF.CUT, self.tr['14'], shortcut="Ctrl+X")
         cut_action.triggered.connect(self.cut)
         menu.addAction(cut_action)        
 
-        rotate_action = Action(FIF.ROTATE, 'Rotate', shortcut="Ctrl+R")
+        rotate_action = Action(FIF.ROTATE, self.tr['15'], shortcut="Ctrl+R")
         rotate_action.triggered.connect(self.rotate_object)
         menu.addAction(rotate_action)     
 
         menu.addSeparator()      
 
-        properties_action = Action(FIF.INFO, 'Properties', shortcut="Ctrl+P")
+        properties_action = Action(FIF.INFO, self.tr['16'], shortcut="Ctrl+P")
         properties_action.triggered.connect(self.properties)
         menu.addAction(properties_action)          
 
-        delete_action = Action(FIF.DELETE, 'Delete', shortcut="Del")
+        delete_action = Action(FIF.DELETE, self.tr['17'], shortcut="Del")
         delete_action.triggered.connect(self.delete)
         menu.addAction(delete_action) 
 
@@ -272,8 +274,8 @@ class ImageViewer(QGraphicsView):
                 resolution = f"{width}x{height}" 
                 image_format = img.format
         except IOError:
-            resolution = "Unknown"
-            image_format = "Unknown"
+            resolution = self.tr["18"]
+            image_format = self.tr["18"]
 
         file_size = os.path.getsize(image_path)
         pretty_size = self.pretty_file_size(file_size)
@@ -282,12 +284,12 @@ class ImageViewer(QGraphicsView):
         modification_date = datetime.fromtimestamp(modification_time).strftime('%Y-%m-%d %H:%M:%S')
 
         content = (
-            f"Directory: {directory}\n"
-            f"File Name: {file_name}\n"
-            f"Resolution: {resolution}\n"
-            f"File Size: {pretty_size}\n"
-            f"Format: {image_format}\n"
-            f"Last Modified: {modification_date}\n"
+            f"{self.tr['19']}: {directory}\n"
+            f"{self.tr['20']}: {file_name}\n"
+            f"{self.tr['21']}: {resolution}\n"
+            f"{self.tr['22']}: {pretty_size}\n"
+            f"{self.tr['23']}: {image_format}\n"
+            f"{self.tr['24']}: {modification_date}\n"
         )
         return content
 
@@ -329,9 +331,7 @@ class ImageViewer(QGraphicsView):
         if self.is_no_local_image_path(self.current_image_path):
             return
         elif self.current_image_path:
-            title = f'Are you sure you want to delete the image?'''
-            content = """If you confirm, the program will completely delete the file with no possibility of recovery."""
-            w = MessageBox(title, content, self.window)
+            w = MessageBox(self.tr["25"], self.tr["26"], self.window)
             if w.exec():
                 try:
                     current_index = self.image_files.index(os.path.basename(self.current_image_path))
@@ -339,8 +339,8 @@ class ImageViewer(QGraphicsView):
                     self.image_files.pop(current_index)
 
                     InfoBar.success(
-                        title='Success!',
-                        content=f'The image has been successfully deleted from your computer.',
+                        title=self.tr['27'],
+                        content=self.tr['28'],
                         orient=Qt.Horizontal,
                         isClosable=True,
                         position=InfoBarPosition.BOTTOM_RIGHT,
@@ -362,7 +362,7 @@ class ImageViewer(QGraphicsView):
 
                 except Exception as e:
                     InfoBar.error(
-                        title='Fatal error',
+                        title=self.tr['29'],
                         content=f"{e}",
                         orient=Qt.Horizontal,
                         isClosable=True,
@@ -372,8 +372,8 @@ class ImageViewer(QGraphicsView):
                     )
         else:
             InfoBar.warning(
-                title='Warning',
-                content="To delete an image, first open it in DLIViewer.",
+                title=self.fr['30'],
+                content=self.fr['31'],
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.BOTTOM_RIGHT,
@@ -389,8 +389,8 @@ class ImageViewer(QGraphicsView):
             clipboard = QApplication.clipboard()
             clipboard.setPixmap(image_to_copy)
             InfoBar.success(
-                title='Success!',
-                content=f'Image has been successfully copied to the clipboard.',
+                title=self.tr['27'],
+                content=self.tr['32'],
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.BOTTOM_RIGHT,
@@ -399,8 +399,8 @@ class ImageViewer(QGraphicsView):
             )
         else:
             InfoBar.warning(
-                title='Warning',
-                content="To copy an image, first open it in DLIViewer.",
+                title=self.tr['30'],
+                content=self.tr["33"],
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.BOTTOM_RIGHT,
@@ -428,8 +428,8 @@ class ImageViewer(QGraphicsView):
                 self.current_image_path = image_path
             else:
                 InfoBar.warning(
-                    title='Warning',
-                    content="To paste an image, first copy the image or its path on your computer.",
+                    title=self.tr['30'],
+                    content=self.tr["34"],
                     orient=Qt.Horizontal,
                     isClosable=True,
                     position=InfoBarPosition.BOTTOM_RIGHT,

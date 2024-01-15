@@ -9,13 +9,14 @@ from qfluentwidgets import (
 import os
 
 class WebImageMsgBox(MessageBoxBase):
-    def __init__(self, app_settings, current_last_opened_folder, current_image_path=None, parent=None):
+    def __init__(self, app_settings, current_last_opened_folder, tr, current_image_path=None, parent=None):
         super().__init__(parent)
         self.current_image_path = current_image_path
         self.app_settings = app_settings
         self.parent = parent
+        self.tr = tr
 
-        self.titleLabel = SubtitleLabel("Type image address", self)
+        self.titleLabel = SubtitleLabel(self.tr["35"], self)
         self.urlLineEdit = LineEdit(self)
 
         self.urlLineEdit.setPlaceholderText(
@@ -24,15 +25,15 @@ class WebImageMsgBox(MessageBoxBase):
         self.urlLineEdit.setText(self.current_image_path)
         self.urlLineEdit.selectAll()
 
-        self.browsePushButton = PushButton("Browse...")
+        self.browsePushButton = PushButton(self.tr["36"])
         self.browsePushButton.clicked.connect(self.browse_files)
 
         self.viewLayout.addWidget(self.titleLabel)
         self.viewLayout.addWidget(self.urlLineEdit)
         self.viewLayout.addWidget(self.browsePushButton)
 
-        self.yesButton.setText("Open image")
-        self.cancelButton.setText("Cancel")
+        self.yesButton.setText(self.tr["1"])
+        self.cancelButton.setText(self.tr["37"])
 
         self.widget.setMinimumWidth(350)
         self.yesButton.setDisabled(True)
@@ -69,7 +70,7 @@ class WebImageMsgBox(MessageBoxBase):
         file_dlg = QFileDialog(self)
         file_dlg.setDirectory(self.parent.current_last_opened_folder)
         file_path, _ = file_dlg.getOpenFileName(
-            self, "Open image", "", image_filter
+            self, self.tr["1"], "", image_filter
         )
 
         if file_path:

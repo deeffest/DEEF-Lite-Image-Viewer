@@ -20,6 +20,7 @@ class AppSettings(QFrame):
         current_check_updates,
         current_window_size,
         settings,
+        tr,
         parent=None
         ):
         super().__init__(parent)
@@ -33,6 +34,7 @@ class AppSettings(QFrame):
         self.current_app_check_updates = current_check_updates
         self.current_app_window_size = current_window_size
         self.app_settings = settings
+        self.tr = tr
 
         uic.loadUi(f'{self.current_app_dir}/core/ui/gui-settings.ui', self)
 
@@ -45,6 +47,16 @@ class AppSettings(QFrame):
         color_index = self.ComboBox_2.findText(self.current_app_color_theme)
         self.ComboBox_2.setCurrentIndex(color_index)
         self.ComboBox_2.currentIndexChanged.connect(self.setAppColorTheme)
+
+        language_list = [
+            'en_EN', 'ru_RU', 'es_ES', 'zh_CN', 
+            'fr_FR', 'de_DE', 'ja_JP', 'uk_UA'
+        ]
+        self.ComboBox.setEnabled(True)
+        self.ComboBox.addItems(language_list)
+        language_index = self.ComboBox.findText(self.app_settings.value("current_app_language", "en_EN"))
+        self.ComboBox.setCurrentIndex(language_index)
+        self.ComboBox.currentIndexChanged.connect(self.setAppLanguage)
 
         self.StrongBodyLabel_2.setText(self.app_version)
 
@@ -63,6 +75,30 @@ class AppSettings(QFrame):
         self.SwitchButton_4.checkedChanged.connect(self.onSwitchButton4Clicked)
 
         self.PushButton.clicked.connect(self.SearchUpdates)
+
+        self._set_translations()
+
+    def _set_translations(self):
+        self.TitleLabel_2.setText(self.tr["9"])
+        self.HyperlinkButton.setText(self.tr["42"])
+        self.SubtitleLabel_5.setText(self.tr["43"])
+        self.BodyLabel_7.setText(self.tr["44"])
+        self.BodyLabel_19.setText(self.tr["45"])
+        self.SubtitleLabel_6.setText(self.tr["46"])
+        self.BodyLabel_8.setText(self.tr["47"])
+        self.BodyLabel_14.setText(self.tr["48"])
+        self.BodyLabel_9.setText(self.tr["49"])
+        self.SubtitleLabel_7.setText(self.tr["50"])
+        self.BodyLabel_10.setText(self.tr["51"])
+        self.BodyLabel_11.setText(self.tr["52"])
+        self.PushButton.setText(self.tr["53"])
+        self.BodyLabel_13.setText(self.tr["54"])
+        self.BodyLabel_12.setText(self.tr["55"])
+        self.RadioButton.setText(self.tr["56"])
+        self.RadioButton_2.setText(self.tr["57"])
+        self.RadioButton_3.setText(self.tr["56"])
+        self.RadioButton_4.setText(self.tr["57"])
+        self.SubtitleLabel_8.setText(self.tr["58"])
 
     def setCheckedFromSettings(self):
         if self.current_app_theme == "dark":
@@ -91,16 +127,21 @@ class AppSettings(QFrame):
 
     def restart_msg_box(self):
         restart_msg = MessageBox(
-            f"Restart for application?",
-            f"For correct application of new parameters it is necessary to restart the application (Not all parameters are required)",
+            self.tr["38"],
+            self.tr["41"],
             self.window
         )
-        restart_msg.yesButton.setText('Restart')
-        restart_msg.cancelButton.setText("Later")
+        restart_msg.yesButton.setText(self.tr["40"])
+        restart_msg.cancelButton.setText(self.tr["5"])
 
         if restart_msg.exec():
             QApplication.quit()
             status = QProcess.startDetached(sys.executable, sys.argv) 
+
+    def setAppLanguage(self, index):
+        current_language = self.ComboBox.itemText(index)
+        self.app_settings.setValue("current_app_language", current_language)
+        self.restart_info_bar()
 
     def onSwitchButton3Clicked(self):
         if self.current_app_window_size == "true":
@@ -141,14 +182,14 @@ class AppSettings(QFrame):
     def restart_info_bar(self):
         w = InfoBar.new(
             icon=FIF.UPDATE,
-            title='Restart for App?',
-            content="The App must be restarted to apply the settings",
+            title=self.tr['38'],
+            content=self.tr['39'],
             orient=Qt.Horizontal,
             isClosable=True,
             position=InfoBarPosition.BOTTOM,
             duration=3000,
             parent=self.window
         )
-        restart_btn = PushButton("Restart")
+        restart_btn = PushButton(self.tr["40"])
         restart_btn.clicked.connect(self.restart_msg_box)
         w.addWidget(restart_btn)
