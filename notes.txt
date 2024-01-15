@@ -1,0 +1,4 @@
+1. Github is now used for bug reports, Google Form - bye bye.
+2. Now when an update is successfully found, you can see what's new in it.
+3. Long-awaited localization of the application, 7 languages have been added! 
+Among them: `ru_RU`, `es_ES`, `zh_CN`, `fr_FR`, `de_DE`, `ja_JP` and `uk_UA`.

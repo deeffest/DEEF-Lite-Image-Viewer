@@ -8,7 +8,7 @@ import sys
 from qfluentwidgets import setTheme, setThemeColor, Theme
 
 name = "DEEF Lite Image Viewer"
-version = "1.2"
+version = "1.3"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 supported_formats = [str(fmt, 'utf-8') for fmt in QImageReader.supportedImageFormats()]
