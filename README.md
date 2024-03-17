@@ -1,45 +1,48 @@
 ![icon-0-1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/86cf7235-6216-4ae6-a89f-bfc56a80795f)
 
-# DEEF-Lite-Image-Viewer
+## DEEF Lite Image Viewer
 
-A simple App for viewing images on your Windows PC, written in [PyQt5](https://www.riverbankcomputing.com/software/pyqt/intro) + [PyQt Fluent Widgets](https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
+**Simple application for viewing image files on your Windows PC, written in PyQt5 and its QPixmap.**
 
-Supported image formats: \
- `png`, `jpeg`, `jpg`, `ico`, `webp`, `svg`, `bmp`, `cur`, `gif`, `icns`, `pbm`, `pgm`, `ppm`, `svgz`, `tga`, `tif`, `tiff`, `wbmp`, `xbm` and `xpm`
+**Supported image file formats:**
 
-## Screenshots
+- `png`, `jpeg`, `jpg`, `ico`, `webp`, `svg`, `bmp`, `cur`, `gif`, `icns`, `pbm`, `pgm`, `ppm`, `svgz`, `tga`, `tif`, `tiff`, `wbmp`, `xbm` and `xpm`
 
-![image](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/d7a61821-3217-499a-afc0-19adfc66c26e)
+## Screenshots:
 
-## Download
+![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/d7a61821-3217-499a-afc0-19adfc66c26e)
 
-Distributed as a binary (exe) file: https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases/
+## Getting Started:
 
-## Install
-It's simple! 
+1. **Download and install DLIViewer-Setup.exe:** https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases
 
-1. Go to the directory where you downloaded DLIViewer-Setup.exe
+## Functionality:
 
-2. Open this file and enjoy viewing photos with DLIViewer!
+- **Lightweight and efficient**: DEEF Lite Image Viewer doesn't use a lot of system resources, ensuring smooth operation even on older computers.
+ 
+- **Intuitive interface**: Enjoy a user-friendly design that makes navigating through your photos a simple task.
+ 
+- **Seamless integration**: Set DEEF Lite Image Viewer as the default image viewer in Windows for quick access to your photos.
 
-## Use DLIViewer as default image view in Windows
+**DEEF Lite Image Viewer is a great choice for anyone looking for a simple and reliable way to view image files on their Windows PC.**
 
-1. Locate the DLIViewer.exe program on your computer. Make sure you know the exact file path (C:\Program Files\DLIViewer\DLIViewer.exe).
+## References:
 
-2. Right-click on an image file (e.g., JPEG, PNG) that you want to open with DLIViewer.exe.
+- **Qt:** https://www.qt.io/
 
-3. From the context menu, select "Open with" and then click on "Choose another app."
+- **PyQt:** https://riverbankcomputing.com/software/pyqt
 
-4. A window will appear with a list of available apps. If DLIViewer.exe is listed, select it. If it's not listed, click on the option "More apps" at the bottom of the list.
+- **PyQt Fluent Widgets:** https://github.com/zhiyiYo/PyQt-Fluent-Widgets
 
-5. In the "Choose an app" window, scroll down and click on the link "Look for another app on this PC."
+- **Bug Reports:** https://github.com/deeffest/DEEF-Lite-Image-Viewer/issues/new/choose
 
-6. Navigate to the file path where DLIViewer.exe is located. Select DLIViewer.exe and click "Open."
+## See Also:
 
-7. Windows will now open the selected image file with DLIViewer.exe. Additionally, DLIViewer.exe will be added to the list of available apps for opening image files by default.
+- **DEEF Lite Media Player:** https://github.com/deeffest/DEEF-Lite-Media-Player
+- **Youtube Music Desktop Player:** https://github.com/deeffest/Youtube-Music-Desktop-Player
 
-8. Repeat steps 2-7 for other image file types if you want DLIViewer.exe to be the default viewer for those file types as well.
+## License:
 
----
+DEEF Lite Image Viewer is distributed under the GPLv3 license.
 
-Now, whenever you double-click on an image file, Windows will open it using DLIViewer.exe by default!
+**Please let us know if you have any questions or suggestions.**
