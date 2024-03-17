@@ -4,10 +4,6 @@
 
 **Simple application for viewing image files on your Windows PC, written in PyQt5 and its QPixmap.**
 
-**Supported image file formats:**
-
-- `png`, `jpeg`, `jpg`, `ico`, `webp`, `svg`, `bmp`, `cur`, `gif`, `icns`, `pbm`, `pgm`, `ppm`, `svgz`, `tga`, `tif`, `tiff`, `wbmp`, `xbm` and `xpm`
-
 ## Screenshots:
 
 ![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/d7a61821-3217-499a-afc0-19adfc66c26e)
