@@ -2,11 +2,11 @@
 
 ## DEEF Lite Image Viewer
 
-**Simple application for viewing image files on your Windows PC, written in PyQt5 and its QGraphicsView.**
+**Simple application for viewing image files on your Windows PC, written in PyQt5 and its QLabel.**
 
 ## Screenshots:
 
-![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/d7a61821-3217-499a-afc0-19adfc66c26e)
+![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/8ff2061f-bdcb-4128-a57f-0f662254d43a)
 
 ## Getting Started:
 
@@ -27,8 +27,6 @@
 - **Qt:** https://www.qt.io/
 
 - **PyQt:** https://riverbankcomputing.com/software/pyqt
-
-- **PyQt Fluent Widgets:** https://github.com/zhiyiYo/PyQt-Fluent-Widgets
 
 - **Bug Reports:** https://github.com/deeffest/DEEF-Lite-Image-Viewer/issues/new/choose
 
