@@ -1,55 +1,61 @@
-#main.py
-from core.main_window import Window
-from PyQt5.QtGui import QImageReader
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QSettings, Qt
+from PyQt5.QtGui import QPalette, QColor
 import os
 import sys
-from qfluentwidgets import setTheme, setThemeColor, Theme
+
+from core.main_window import MainWindow
 
 name = "DEEF Lite Image Viewer"
-version = "1.3"
+version = "2.0"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-supported_formats = [str(fmt, 'utf-8') for fmt in QImageReader.supportedImageFormats()]
-filter_ = "Images ({})".format(' '.join('*.' + fmt for fmt in supported_formats))
+def set_app_palette():
+    app_palette = QPalette()
 
-def is_image_file(file_path):
-    _, file_extension = os.path.splitext(file_path)
-    file_extension = file_extension[1:] 
+    if app_theme == "dark":
+        app_palette.setColor(QPalette.Window, QColor(53, 53, 53))
+        app_palette.setColor(QPalette.WindowText, Qt.white)
+        app_palette.setColor(QPalette.Base, QColor(35, 35, 35))
+        app_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+        app_palette.setColor(QPalette.Text, Qt.white)
+        app_palette.setColor(QPalette.Button, QColor(53, 53, 53))
+        app_palette.setColor(QPalette.ButtonText, Qt.white)
+        app_palette.setColor(QPalette.BrightText, Qt.red)
+        app_palette.setColor(QPalette.Link, QColor(42, 130, 218))
+        app_palette.setColor(QPalette.Highlight, QColor(42, 183, 66))
+        app_palette.setColor(QPalette.HighlightedText, Qt.white)
+        app_palette.setColor(QPalette.Active, QPalette.Button, QColor(53, 53, 53))
+        app_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
+        app_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
+        app_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
+        app_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(53, 53, 53))
+    else:
+        app_palette = QPalette()
+        app_palette.setColor(QPalette.Highlight, QColor(109, 215, 123))
+        app_palette.setColor(QPalette.HighlightedText, Qt.black)
 
-    return file_extension in supported_formats
+    app.setPalette(app_palette)
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
+if __name__ == '__main__':    
     settings = QSettings("deeffest", name)
+    app_theme = settings.value("app_theme")  
 
-    current_app_theme = settings.value("current_app_theme", "dark")
-    current_app_color_theme = settings.value("current_app_color_theme", "Default")
-    current_scene_theme = settings.value("current_scene_theme", "dark")
-    current_window_size = settings.value("current_window_size", "true")
-    current_check_updates = settings.value("current_check_updates", "true")
-    current_last_opened_folder = settings.value("current_last_opened_folder", current_dir)
+    app = QApplication(sys.argv + (['-platform', 'windows:darkmode=1'] if app_theme == "dark" else []))
+    app.setStyle("Fusion")
+    set_app_palette()
 
-    image_path = sys.argv[1] if len(sys.argv) > 1 and is_image_file(sys.argv[1]) else None
+    image_path = None
+    for arg in sys.argv[1:]:
+        image_path = arg
+        break
 
-    setThemeColor(str(current_app_color_theme))
-    setTheme(Theme.DARK if current_app_theme == "dark" else Theme.LIGHT)
-
-    ImgViewer = Window(
-        name, 
-        current_dir, 
-        current_window_size, 
-        current_app_color_theme, 
-        current_app_theme,
-        settings, 
-        current_scene_theme, 
-        filter_, 
+    main_window = MainWindow(
+        name,
         version,
-        current_check_updates,
-        current_last_opened_folder,
-        supported_formats,
-        image_path
-    )
-    
+        current_dir,
+        settings,
+        image_path=image_path
+        )
+
     sys.exit(app.exec_())

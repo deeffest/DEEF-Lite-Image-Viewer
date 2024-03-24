@@ -1,4 +1,7 @@
-1. Github is now used for bug reports, Google Form - bye bye.
-2. Now when an update is successfully found, you can see what's new in it.
-3. Long-awaited localization of the application, 7 languages have been added! 
-Among them: `ru_RU`, `es_ES`, `zh_CN`, `fr_FR`, `de_DE`, `ja_JP` and `uk_UA`.
+Update 2.0!
+- Complete abandonment of PyQt Fluent Widgets interface, now only standard widgets from PyQt5 are used.
+- Viewing images is now done via QLabel instead of QGraphicsView.
+- Removed almost all functionality of the app (temporarily).
+- You can now view folder content through the Dock widget (you can hide it if you want).
+- Replaced the standard method of checking a file (extension list) by checking its mimetype.
+- Added the ability to open full screen mode.
