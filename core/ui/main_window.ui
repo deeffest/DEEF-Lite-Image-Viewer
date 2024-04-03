@@ -43,7 +43,7 @@
            <x>0</x>
            <y>0</y>
            <width>416</width>
-           <height>481</height>
+           <height>483</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -92,7 +92,7 @@
      <x>0</x>
      <y>0</y>
      <width>696</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -133,7 +133,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dockWidget">
    <property name="features">
-    <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+    <set>QDockWidget::AllDockWidgetFeatures</set>
    </property>
    <property name="windowTitle">
     <string>Folder Contents</string>
@@ -163,8 +163,14 @@
            <height>30</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="toolTip">
           <string>Previous</string>
+         </property>
+         <property name="statusTip">
+          <string>Opens the previous image in the folder.</string>
          </property>
          <property name="text">
           <string>...</string>
@@ -182,8 +188,14 @@
            <height>30</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="toolTip">
           <string>Next</string>
+         </property>
+         <property name="statusTip">
+          <string>Opens the next image in the folder.</string>
          </property>
          <property name="text">
           <string>...</string>
@@ -212,6 +224,9 @@
    <property name="text">
     <string>Open Image...</string>
    </property>
+   <property name="statusTip">
+    <string>After selecting the desired image, displays it in the app.</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
@@ -223,6 +238,9 @@
    <property name="text">
     <string>About...</string>
    </property>
+   <property name="statusTip">
+    <string>Provides some information about this app.</string>
+   </property>
   </action>
   <action name="actionFull_Screen">
    <property name="checkable">
@@ -230,6 +248,9 @@
    </property>
    <property name="text">
     <string>Full Screen</string>
+   </property>
+   <property name="statusTip">
+    <string>Opens the app in full screen mode.</string>
    </property>
    <property name="shortcut">
     <string>F11</string>
@@ -250,6 +271,9 @@
    <property name="text">
     <string>Previous</string>
    </property>
+   <property name="statusTip">
+    <string>Opens the previous image in the folder.</string>
+   </property>
    <property name="shortcut">
     <string>Left</string>
    </property>
@@ -263,6 +287,9 @@
    </property>
    <property name="text">
     <string>Next</string>
+   </property>
+   <property name="statusTip">
+    <string>Opens the next image in the folder.</string>
    </property>
    <property name="shortcut">
     <string>Right</string>
@@ -303,6 +330,9 @@
    <property name="text">
     <string>About Qt</string>
    </property>
+   <property name="statusTip">
+    <string>Provides some information about the framework used to create this app interface.</string>
+   </property>
   </action>
   <action name="actionExit">
    <property name="text">
@@ -316,6 +346,9 @@
    <property name="text">
     <string>Check for Updates</string>
    </property>
+   <property name="statusTip">
+    <string>Checks if new versions of the app are publicly available.</string>
+   </property>
   </action>
   <action name="actionDark_Theme">
    <property name="checkable">
@@ -323,6 +356,9 @@
    </property>
    <property name="text">
     <string>Dark Theme</string>
+   </property>
+   <property name="statusTip">
+    <string>Includes a dark app theme (requires a reboot to apply).</string>
    </property>
   </action>
  </widget>

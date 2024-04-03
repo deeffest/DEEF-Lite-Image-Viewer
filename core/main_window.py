@@ -16,6 +16,7 @@ from core._init_connect import _init_connect
 from core._init_shortcuts import _init_shortcuts
 from core._init_config import _init_config
 from core._init_icons import _init_icons
+from core._init_styles import _init_styles
 from core._init_menu import _init_menu
 
 class MainWindow(QMainWindow):
@@ -51,6 +52,7 @@ class MainWindow(QMainWindow):
         _init_shortcuts(self)
         _init_config(self)
         _init_icons(self)
+        _init_styles(self)
 
         self._init_window()
         self.check_for_updates()
@@ -170,23 +172,30 @@ class MainWindow(QMainWindow):
             self.settings.setValue("app_theme", "light")
 
     def full_screen(self):
-        if self.windowState() & Qt.WindowFullScreen:
+        if self.windowState() & Qt.WindowFullScreen:            
+            self.menubar.show()
+            self.statusbar.show()
             self.showNormal()
             self.actionFull_Screen.setChecked(False)
         else:
+            self.menubar.hide()
+            self.statusbar.hide()
             self.setWindowState(Qt.WindowFullScreen)
             self.actionFull_Screen.setChecked(True)
 
     def check_for_updates(self):
         try:
-            response = requests.get("https://api.github.com/repos/deeffest/DEEF-Lite-Image-Viewer/releases/latest")
+            response = requests.get(
+                "https://api.github.com/repos/deeffest/DEEF-Lite-Image-Viewer/releases/latest")
+            item_version = response.json()["name"]
+            item_download = response.json().get("html_url")         
 
-            if response.json()["name"] != self.version:
+            if item_version != self.version:
                 reply = QMessageBox.question(self, self.name,
                                              "A new version is available! Want to download and install?",
                                              QMessageBox.Yes | QMessageBox.No)
                 if reply == QMessageBox.Yes:
-                    webbrowser.open_new_tab(response.json().get("html_url") )
+                    webbrowser.open_new_tab(item_download)
                     sys.exit(0)
             else:
                 self.statusbar.showMessage("No new versions were found.", 2000)

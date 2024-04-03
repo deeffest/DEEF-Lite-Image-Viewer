@@ -7,7 +7,7 @@ import sys
 from core.main_window import MainWindow
 
 name = "DEEF Lite Image Viewer"
-version = "2.0"
+version = "2.0.1"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 def set_app_palette():

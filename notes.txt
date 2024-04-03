@@ -1,7 +1,3 @@
-Update 2.0!
-- Complete abandonment of PyQt Fluent Widgets interface, now only standard widgets from PyQt5 are used.
-- Viewing images is now done via QLabel instead of QGraphicsView.
-- Removed almost all functionality of the app (temporarily).
-- You can now view folder content through the Dock widget (you can hide it if you want).
-- Replaced the standard method of checking a file (extension list) by checking its mimetype.
-- Added the ability to open full screen mode.
+Update 2.0.1!
+- Styles to components such as QToolTip, QMenuBar and QStatusBar have been added to the app.
+- Other fixes and improvements.
