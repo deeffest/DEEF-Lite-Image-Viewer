@@ -6,7 +6,7 @@
 
 ## Screenshots:
 
-![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/8ff2061f-bdcb-4128-a57f-0f662254d43a)
+![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/ba63a92f-b2e2-4817-a309-ae639790620f)
 
 ## Getting Started:
 
