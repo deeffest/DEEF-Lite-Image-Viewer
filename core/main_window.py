@@ -6,8 +6,8 @@ import sys
 
 from PyQt5.QtWidgets import qApp, QMainWindow, QFileDialog, QMessageBox, \
     QListWidgetItem
-from PyQt5.QtGui import QIcon, QColor, QPixmap, QImage, QPalette
-from PyQt5.QtCore import Qt, QSize, QEvent
+from PyQt5.QtGui import QIcon, QPixmap, QImage
+from PyQt5.QtCore import Qt, QEvent
 from PyQt5 import uic
 
 from core._init_attributes import _init_attributes
@@ -129,7 +129,7 @@ class MainWindow(QMainWindow):
         current_image = os.path.basename(self.image_path)
         items = self.listWidget.findItems(current_image, Qt.MatchExactly)
         for i in range(self.listWidget.count()):
-            self.listWidget.item(i).setForeground(Qt.white if self.settings.value("app_theme") == "dark" else Qt.black)
+            self.listWidget.item(i).setForeground(Qt.white if self.settings.value("app_theme", "dark") == "dark" else Qt.black)
 
         if items:
             item = items[0]
@@ -177,11 +177,13 @@ class MainWindow(QMainWindow):
             self.statusbar.show()
             self.showNormal()
             self.actionFull_Screen.setChecked(False)
+            self.toolButton_3.setChecked(False)
         else:
             self.menubar.hide()
             self.statusbar.hide()
             self.setWindowState(Qt.WindowFullScreen)
             self.actionFull_Screen.setChecked(True)
+            self.toolButton_3.setChecked(True)
 
     def check_for_updates(self):
         try:

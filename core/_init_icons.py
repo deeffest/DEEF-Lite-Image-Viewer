@@ -3,15 +3,21 @@ from PyQt5.QtGui import QIcon, QPixmap
 def _init_icons(self):
     icons = {
         "toolButton": {
-            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme")}/arrow_back_ios.svg',
+            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/arrow_back_ios.svg',
             "normal_off": None, 
             "disabled": f'{self.current_dir}/resources/icons/disabled/arrow_back_ios.svg', 
             "disabled_off": None,
         },
         "toolButton_2": {
-            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme")}/arrow_forward_ios.svg',
+            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/arrow_forward_ios.svg',
             "normal_off": None, 
             "disabled": f'{self.current_dir}/resources/icons/disabled/arrow_forward_ios.svg', 
+            "disabled_off": None,
+        },
+        "toolButton_3": {
+            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/open_in_full.svg',
+            "normal_off": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/close_fullscreen.svg',
+            "disabled": None, 
             "disabled_off": None,
         },
     }

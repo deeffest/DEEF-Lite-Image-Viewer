@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import qApp
 def _init_connect(self):
     self.actionOpen_Image.triggered.connect(self.open_file_dialog)
     self.actionFull_Screen.triggered.connect(self.full_screen)
+    self.toolButton_3.clicked.connect(self.full_screen)
     self.actionDark_Theme.triggered.connect(self.toggle_dark_theme)
     self.actionPrevious.triggered.connect(self.previous)
     self.toolButton.clicked.connect(self.previous)

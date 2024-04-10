@@ -136,7 +136,7 @@
     <set>QDockWidget::AllDockWidgetFeatures</set>
    </property>
    <property name="windowTitle">
-    <string>Folder Contents</string>
+    <string>Control Panel</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -215,6 +215,37 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_3">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="toolTip">
+          <string>Full Screen</string>
+         </property>
+         <property name="statusTip">
+          <string>Switches the full screen mode.</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
@@ -225,7 +256,7 @@
     <string>Open Image...</string>
    </property>
    <property name="statusTip">
-    <string>After selecting the desired image, displays it in the app.</string>
+    <string>Opens the file (image) selection dialog box.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -239,7 +270,7 @@
     <string>About...</string>
    </property>
    <property name="statusTip">
-    <string>Provides some information about this app.</string>
+    <string>Opens a dialog box with information about the app.</string>
    </property>
   </action>
   <action name="actionFull_Screen">
@@ -250,7 +281,7 @@
     <string>Full Screen</string>
    </property>
    <property name="statusTip">
-    <string>Opens the app in full screen mode.</string>
+    <string>Switches the full screen mode.</string>
    </property>
    <property name="shortcut">
     <string>F11</string>
@@ -331,7 +362,7 @@
     <string>About Qt</string>
    </property>
    <property name="statusTip">
-    <string>Provides some information about the framework used to create this app interface.</string>
+    <string>Opens a dialog box with information about the framework used to create this app's GUI.</string>
    </property>
   </action>
   <action name="actionExit">
@@ -347,7 +378,7 @@
     <string>Check for Updates</string>
    </property>
    <property name="statusTip">
-    <string>Checks if new versions of the app are publicly available.</string>
+    <string>Checks the Github repository for new versions of the app.</string>
    </property>
   </action>
   <action name="actionDark_Theme">
@@ -358,7 +389,7 @@
     <string>Dark Theme</string>
    </property>
    <property name="statusTip">
-    <string>Includes a dark app theme (requires a reboot to apply).</string>
+    <string>Switches the current app theme to dark (reboot required).</string>
    </property>
   </action>
  </widget>
