@@ -6,7 +6,7 @@ Simple application for viewing image files on your Windows PC, written in PyQt5 
 
 ## Screenshots:
 
-![Screenshot_1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/ba63a92f-b2e2-4817-a309-ae639790620f)
+![Screenshot_2](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/c77ff6bc-d78f-4346-a127-7e7b92d8cbbc)
 
 ## Getting Started:
 
