@@ -42,8 +42,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>416</width>
-           <height>483</height>
+           <width>694</width>
+           <height>471</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -65,7 +65,7 @@
              <enum>Qt::CustomContextMenu</enum>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;DEEF Lite Image Viewer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;by deeffest, 2023-2024&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;DEEF Lite Image Viewer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;is a simple image viewer for Windows tries to stick to the principle: &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Lightweight, Fast, Open. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="scaledContents">
              <bool>false</bool>
@@ -74,7 +74,7 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="wordWrap">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -87,6 +87,9 @@
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -95,11 +98,16 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
     <addaction name="actionOpen_Image"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit_2"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -114,16 +122,43 @@
     <property name="title">
      <string>View</string>
     </property>
+    <widget class="QMenu" name="menuSet_As">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Set As...</string>
+     </property>
+     <addaction name="actionSet_as_Wallpaper"/>
+    </widget>
     <addaction name="actionFull_Screen"/>
+    <addaction name="actionSlide_Show"/>
     <addaction name="separator"/>
-    <addaction name="actionDark_Theme"/>
+    <addaction name="actionZoom_In"/>
+    <addaction name="actionZoom_Out"/>
+    <addaction name="actionRotate"/>
+    <addaction name="separator"/>
+    <addaction name="menuSet_As"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
    </widget>
    <widget class="QMenu" name="menuNavigate">
     <property name="title">
      <string>Navigate</string>
     </property>
+    <widget class="QMenu" name="menuFolder_Contents">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Folder Contents</string>
+     </property>
+     <addaction name="actionFolder_Contents_3"/>
+    </widget>
     <addaction name="actionPrevious"/>
     <addaction name="actionNext"/>
+    <addaction name="separator"/>
+    <addaction name="menuFolder_Contents"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -131,132 +166,32 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QDockWidget" name="dockWidget">
-   <property name="features">
-    <set>QDockWidget::AllDockWidgetFeatures</set>
+  <widget class="QToolBar" name="toolBar">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
    </property>
    <property name="windowTitle">
-    <string>Control Panel</string>
+    <string>toolBar</string>
    </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QListWidget" name="listWidget">
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QToolButton" name="toolButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>Previous</string>
-         </property>
-         <property name="statusTip">
-          <string>Opens the previous image in the folder.</string>
-         </property>
-         <property name="text">
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="toolButton_2">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>Next</string>
-         </property>
-         <property name="statusTip">
-          <string>Opens the next image in the folder.</string>
-         </property>
-         <property name="text">
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QToolButton" name="toolButton_3">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>Full Screen</string>
-         </property>
-         <property name="statusTip">
-          <string>Switches the full screen mode.</string>
-         </property>
-         <property name="text">
-          <string>...</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionOpen_Image">
    <property name="text">
     <string>Open Image...</string>
    </property>
    <property name="statusTip">
-    <string>Opens the file (image) selection dialog box.</string>
+    <string/>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -269,9 +204,6 @@
    <property name="text">
     <string>About...</string>
    </property>
-   <property name="statusTip">
-    <string>Opens a dialog box with information about the app.</string>
-   </property>
   </action>
   <action name="actionFull_Screen">
    <property name="checkable">
@@ -279,9 +211,6 @@
    </property>
    <property name="text">
     <string>Full Screen</string>
-   </property>
-   <property name="statusTip">
-    <string>Switches the full screen mode.</string>
    </property>
    <property name="shortcut">
     <string>F11</string>
@@ -302,9 +231,6 @@
    <property name="text">
     <string>Previous</string>
    </property>
-   <property name="statusTip">
-    <string>Opens the previous image in the folder.</string>
-   </property>
    <property name="shortcut">
     <string>Left</string>
    </property>
@@ -318,9 +244,6 @@
    </property>
    <property name="text">
     <string>Next</string>
-   </property>
-   <property name="statusTip">
-    <string>Opens the next image in the folder.</string>
    </property>
    <property name="shortcut">
     <string>Right</string>
@@ -361,9 +284,6 @@
    <property name="text">
     <string>About Qt</string>
    </property>
-   <property name="statusTip">
-    <string>Opens a dialog box with information about the framework used to create this app's GUI.</string>
-   </property>
   </action>
   <action name="actionExit">
    <property name="text">
@@ -377,19 +297,134 @@
    <property name="text">
     <string>Check for Updates</string>
    </property>
-   <property name="statusTip">
-    <string>Checks the Github repository for new versions of the app.</string>
+  </action>
+  <action name="actionSettings">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Settings...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
    </property>
   </action>
-  <action name="actionDark_Theme">
+  <action name="actionSet_as_Wallpaper">
    <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Dark Theme</string>
+    <string>Set as Wallpaper</string>
    </property>
-   <property name="statusTip">
-    <string>Switches the current app theme to dark (reboot required).</string>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionGo_to_Folder">
+   <property name="text">
+    <string>Go to Folder</string>
+   </property>
+  </action>
+  <action name="actionFolder_Contents">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Folder Contents</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="actionExit_2">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="text">
+    <string>History...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="actionOpen_Folder">
+   <property name="text">
+    <string>Open Folder</string>
+   </property>
+  </action>
+  <action name="actionFolder_Contents_3">
+   <property name="text">
+    <string>Folder Contents</string>
+   </property>
+  </action>
+  <action name="actionSlide_Show">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Slide Show</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
    </property>
   </action>
  </widget>

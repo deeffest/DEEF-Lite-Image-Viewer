@@ -1,39 +1,21 @@
 from PyQt5.QtGui import QIcon, QPixmap
 
-def _init_icons(self):
-    icons = {
-        "toolButton": {
-            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/arrow_back_ios.svg',
-            "normal_off": None, 
-            "disabled": f'{self.current_dir}/resources/icons/disabled/arrow_back_ios.svg', 
-            "disabled_off": None,
-        },
-        "toolButton_2": {
-            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/arrow_forward_ios.svg',
-            "normal_off": None, 
-            "disabled": f'{self.current_dir}/resources/icons/disabled/arrow_forward_ios.svg', 
-            "disabled_off": None,
-        },
-        "toolButton_3": {
-            "normal": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/open_in_full.svg',
-            "normal_off": f'{self.current_dir}/resources/icons/{self.settings.value("app_theme", "dark")}/close_fullscreen.svg',
-            "disabled": None, 
-            "disabled_off": None,
-        },
-    }
+import qtawesome as qta
 
-    for action_name, icon_paths in icons.items():
-        action = getattr(self, action_name, None)
-        if action:
-            icon = QIcon()
-            if icon_paths.get("normal"):
-                icon.addPixmap(QPixmap(icon_paths["normal"]), QIcon.Normal, QIcon.Off)
-            if icon_paths.get("normal_off"):
-                icon.addPixmap(QPixmap(icon_paths["normal_off"]), QIcon.Normal, QIcon.On)
-            if icon_paths.get("disabled"):
-                icon.addPixmap(QPixmap(icon_paths["disabled"]), QIcon.Disabled, QIcon.Off)
-            if icon_paths.get("disabled_off"):
-                icon.addPixmap(QPixmap(icon_paths["disabled_off"]), QIcon.Disabled, QIcon.On)
-            action.setIcon(icon)
-        else:
-            print(f"Action {action_name} not found in the Window class.")
+def _init_icons(self):
+    self.actionOpen_Image.setIcon(qta.icon('ei.file-new'))
+    self.actionExit_2.setIcon(qta.icon('fa.close'))
+    self.actionFull_Screen.setIcon(qta.icon('ei.resize-full'))
+    self.actionSlide_Show.setIcon(qta.icon('ri.slideshow-2-line'))
+    self.actionZoom_In.setIcon(qta.icon('ei.zoom-in'))
+    self.actionZoom_Out.setIcon(qta.icon('ei.zoom-out'))
+    self.actionRotate.setIcon(qta.icon('fa.rotate-left'))
+    self.menuSet_As.setIcon(qta.icon('mdi.image-move'))
+    self.actionSet_as_Wallpaper.setIcon(qta.icon('mdi.wallpaper'))
+    self.actionSettings.setIcon(qta.icon('ri.settings-4-fill'))
+    self.actionPrevious.setIcon(qta.icon('ei.chevron-left'))
+    self.actionNext.setIcon(qta.icon('ei.chevron-right'))
+    self.menuFolder_Contents.setIcon(qta.icon('ei.folder-open'))
+    self.actionCheck_Updates.setIcon(qta.icon('ei.search'))
+    self.actionAbout.setIcon(qta.icon('ei.info-circle'))
+    self.actionAbout_Qt.setIcon(QIcon(f'{self.current_dir}/resources/icons/qt.png'))

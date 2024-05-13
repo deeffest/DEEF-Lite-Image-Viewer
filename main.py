@@ -7,7 +7,7 @@ import sys
 from core.main_window import MainWindow
 
 name = "DEEF Lite Image Viewer"
-version = "2.0.2"
+version = "2.1"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 def set_app_palette():
@@ -39,7 +39,7 @@ def set_app_palette():
 
 if __name__ == '__main__':    
     settings = QSettings("deeffest", name)
-    app_theme = settings.value("app_theme", "dark")  
+    app_theme = settings.value("app_theme", "dark")
 
     app = QApplication(sys.argv + (['-platform', 'windows:darkmode=1'] if app_theme == "dark" else []))
     app.setStyle("Fusion")

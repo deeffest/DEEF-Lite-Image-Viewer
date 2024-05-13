@@ -3,7 +3,7 @@ def _init_styles(self):
 		self.setStyleSheet("""
 			QToolTip {
 				background-color: rgb(44,44,44);
-				border: 1px solid rgb(29,29,29);
+				border: 1px solid rgb(93,93,93);
 				color: white;
 			}
 		""")
@@ -19,6 +19,11 @@ def _init_styles(self):
 		self.statusbar.setStyleSheet("""
 			QStatusBar {
 				background-color: rgb(32,32,32);
+			}
+		""")
+		self.toolBar.setStyleSheet("""
+			QToolBar {
+				background-color: rgb(32,32,32);
 				border-top: 1px solid rgb(29,29,29);
 			}
 		""")
@@ -26,7 +31,7 @@ def _init_styles(self):
 		self.setStyleSheet("""
 			QToolTip {
 				background-color: rgb(249,249,249);
-				border: 1px solid rgb(229,229,229);
+				border: 1px solid rgb(171,171,171);
 				color: black;
 			}
 		""")
@@ -38,6 +43,11 @@ def _init_styles(self):
 		""")
 		self.statusbar.setStyleSheet("""
 			QStatusBar {
+				background-color: rgb(243,243,243);
+			}
+		""")
+		self.toolBar.setStyleSheet("""
+			QToolBar {
 				background-color: rgb(243,243,243);
 				border-top: 1px solid rgb(230,230,230);
 			}
