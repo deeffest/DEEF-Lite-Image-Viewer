@@ -2,7 +2,7 @@
 
 ## DEEF Lite Image Viewer
 
-Simple application for viewing image files on your Windows PC, written in PyQt5 and its QLabel + QPixmap/QMovie.
+Simple application for viewing image files on your Windows PC, written in PyQt5 and its QLabel + QPixmap.
 
 ## Screenshots:
 
