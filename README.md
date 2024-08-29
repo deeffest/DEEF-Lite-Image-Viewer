@@ -24,7 +24,7 @@ DEEF Lite Image Viewer is a cross-platform image viewer designed for simplicity,
   The interface theme adapts to match your operating system's theme.
 
 ## 📸 Screenshots
-![Screenshot_1](https://github.com/user-attachments/assets/5f48f6b1-97b6-4dc8-b54c-0d4b7724643e)
+![Screenshot_1](https://github.com/user-attachments/assets/1fca8850-cbbb-42ff-8035-273759b6fd88)
 
 ## 🚀 Getting Started
 ### Using builds with executable files
