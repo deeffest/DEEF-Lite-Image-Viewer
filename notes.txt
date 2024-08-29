@@ -1,8 +1,0 @@
-Update 2.1!
-- The interface has been redesigned.
-- Added icons to all menu items.
-- Added the ability to rotate the image.
-- The settings window has been added.
-- Added a slide show feature.
-- Added the ability to set an image as your desktop wallpaper.
-- Other fixes and improvements.

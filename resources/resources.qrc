@@ -1,0 +1,60 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="icon_win">icons/icon.ico</file>
+        <file alias="icon_linux">icons/icon.png</file>
+
+        <!-- dark icons -->
+        <file alias="file_dark">icons/dark/file.png</file>
+        <file alias="url_dark">icons/dark/url.png</file>
+        <file alias="properties_dark">icons/dark/properties.png</file>
+        <file alias="quit_dark">icons/dark/quit.png</file>
+        <file alias="full_screen_dark">icons/dark/full_screen.png</file>
+        <file alias="close_full_screen_dark">icons/dark/close_full_screen.png</file>
+        <file alias="zoom_in_dark">icons/dark/zoom_in.png</file>
+        <file alias="zoom_out_dark">icons/dark/zoom_out.png</file>
+        <file alias="rotate_dark">icons/dark/rotate.png</file>
+        <file alias="color_dropper_dark">icons/dark/color_dropper.png</file>
+        <file alias="clear_filters_dark">icons/dark/clear_filters.png</file>
+        <file alias="color_dark">icons/dark/color.png</file>
+        <file alias="white_dark">icons/dark/white.png</file>
+        <file alias="black_dark">icons/dark/black.png</file>
+        <file alias="wallpaper_dark">icons/dark/wallpaper.png</file>
+        <file alias="copy_dark">icons/dark/copy.png</file>
+        <file alias="paste_dark">icons/dark/paste.png</file>
+        <file alias="clear_dark">icons/dark/clear.png</file>
+        <file alias="previous_dark">icons/dark/previous.png</file>
+        <file alias="next_dark">icons/dark/next.png</file>
+        <file alias="search_dark">icons/dark/search.png</file>
+        <file alias="about_dark">icons/dark/about.png</file>
+        <file alias="save_as_dark">icons/dark/save_as.png</file>
+
+        <!-- light icons -->
+        <file alias="file_light">icons/light/file.png</file>
+        <file alias="url_light">icons/light/url.png</file>
+        <file alias="properties_light">icons/light/properties.png</file>
+        <file alias="quit_light">icons/light/quit.png</file>
+        <file alias="full_screen_light">icons/light/full_screen.png</file>
+        <file alias="close_full_screen_light">icons/light/close_full_screen.png</file>
+        <file alias="zoom_in_light">icons/light/zoom_in.png</file>
+        <file alias="zoom_out_light">icons/light/zoom_out.png</file>
+        <file alias="rotate_light">icons/light/rotate.png</file>
+        <file alias="color_light">icons/light/color.png</file>
+        <file alias="white_light">icons/light/white.png</file>
+        <file alias="black_light">icons/light/black.png</file>
+        <file alias="color_dropper_light">icons/light/color_dropper.png</file>
+        <file alias="clear_filters_light">icons/light/clear_filters.png</file>
+        <file alias="wallpaper_light">icons/light/wallpaper.png</file>
+        <file alias="copy_light">icons/light/copy.png</file>
+        <file alias="paste_light">icons/light/paste.png</file>
+        <file alias="clear_light">icons/light/clear.png</file>
+        <file alias="previous_light">icons/light/previous.png</file>
+        <file alias="next_light">icons/light/next.png</file>
+        <file alias="search_light">icons/light/search.png</file>
+        <file alias="about_light">icons/light/about.png</file>
+        <file alias="save_as_light">icons/light/save_as.png</file>
+
+        <!-- disabled icons -->
+        <file alias="zoom_in_disabled">icons/disabled/zoom_in.png</file>
+        <file alias="zoom_out_disabled">icons/disabled/zoom_out.png</file>
+    </qresource>
+</RCC>

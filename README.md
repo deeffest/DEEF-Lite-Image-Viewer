@@ -1,42 +1,72 @@
-![icon-1](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/74563545-b5b3-4ee4-820a-212e5a27b497)
+![icon](https://github.com/user-attachments/assets/3f0581ff-8a77-4485-92c6-3f042fe6ac51)
 
-## DEEF Lite Image Viewer
+## DEEF Lite Image Viewer 🖼️
 
-Simple application for viewing image files on your Windows PC, written in PyQt5 and its QLabel + QPixmap.
+DEEF Lite Image Viewer is a cross-platform image viewer designed for simplicity, lightweight performance, and broad compatibility across Windows and Linux.
 
-## Screenshots:
+## ✨ Key Features
+- **Cross-Platform Compatibility**  
+  Runs seamlessly on Windows and Linux.
 
-![Screenshot_2](https://github.com/deeffest/DEEF-Lite-Image-Viewer/assets/117280555/c77ff6bc-d78f-4346-a127-7e7b92d8cbbc)
+- **Comprehensive Image Support**  
+  Open a wide range of image formats including JPEG, PNG, BMP, WEBP, and more.
 
-## Getting Started:
+- **Folder Navigation**  
+  Easily navigate with next and previous controls.
 
-1. **Download and install DLIViewer-Setup.exe:** https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases
+- **Drag and Drop Support**  
+  Effortlessly view images by dragging and dropping them into the viewer.
 
-## Functionality:
+- **Zoom and Rotate**  
+  Adjust zoom levels and rotate images for optimal viewing.
 
-- **Lightweight and efficient**: DEEF Lite Image Viewer doesn't use a lot of system resources, ensuring smooth operation even on older computers.
- 
-- **Intuitive interface**: Enjoy a user-friendly design that makes navigating through your photos a simple task.
- 
-- **Seamless integration**: Set DEEF Lite Image Viewer as the default image viewer in Windows for quick access to your photos.
+- **Adaptive Interface**  
+  The interface theme adapts to match your operating system's theme.
 
-**DEEF Lite Image Viewer is a great choice for anyone looking for a simple and reliable way to view image files on their Windows PC.**
+## 📸 Screenshots
+![Screenshot_1](https://github.com/user-attachments/assets/5f48f6b1-97b6-4dc8-b54c-0d4b7724643e)
 
-## References:
+## 🚀 Getting Started
+### Using builds with executable files
+1. Download the archive for your OS from the releases page: [Latest Release](https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases/latest).
+2. Unzip the archive to any folder.
+3. Navigate to the folder with the unzipped application and run the executable file.
 
-- **Qt:** https://www.qt.io/
+### Using the source code
+1. **Install Python**  
+   Ensure Python is installed on your system. Tested on:
+   - Windows 10 (22H2) with Python 3.11.3 (64-bit).
+   - Windows 11 (23H2) with Python 3.12.5 (64-bit).
+   - Ubuntu (24.04) with Python 3.12.3 (64-bit).
+   - Manjaro (24.0.5).
+   
+   [Download Python](https://www.python.org/downloads/)
 
-- **PyQt:** https://riverbankcomputing.com/software/pyqt
+2. **Clone the Repository**  
+   Clone the repository to your local machine.
 
-- **Bug Reports:** https://github.com/deeffest/DEEF-Lite-Image-Viewer/issues/new/choose
+3. **Install Dependencies**  
+   In the project directory, install dependencies with:
+   ```
+   pip install -r requirements.txt
+   ```
 
-## See Also:
+4. **Run the Application**  
+   Start the application with:
+   ```
+   python main.py
+   ```
 
-- **DEEF Lite Media Player:** https://github.com/deeffest/DEEF-Lite-Media-Player
-- **Youtube Music Desktop Player:** https://github.com/deeffest/Youtube-Music-Desktop-Player
+## 🔗 References
+- **Qt:** [Learn More](https://www.qt.io/)
+- **PySide:** [Learn More](https://www.qt.io/qt-for-python)
+- **GitHub Issues:** [Report Issues](https://github.com/deeffest/DEEF-Lite-Image-Viewer/issues/new/choose)
 
-## License:
+## 📚 See Also
+- **DEEF Lite Media Player:** [Explore](https://github.com/deeffest/DEEF-Lite-Media-Player)
+- **YouTube Music Desktop Player:** [Explore](https://github.com/deeffest/Youtube-Music-Desktop-Player)
 
-DEEF Lite Image Viewer is distributed under the GPLv3 license.
+## 📜 License
+DEEF Lite Image Viewer is distributed under the **GPLv3 license**.
 
 **Please let us know if you have any questions or suggestions.**

@@ -1,61 +1,68 @@
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QSettings, Qt
-from PyQt5.QtGui import QPalette, QColor
 import os
 import sys
-
+import logging
+from PySide6.QtWidgets import QApplication
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor, QPalette
 from core.main_window import MainWindow
 
-name = "DEEF Lite Image Viewer"
-version = "2.1"
-current_dir = os.path.dirname(os.path.abspath(__file__))
+name = "DEEF-Lite-Image-Viewer"
+version = "3.0-beta"
+author = "deeffest"
+website = "deeffest.pythonanywhere.com"
 
-def set_app_palette():
-    app_palette = QPalette()
+def setup_logging():
+    log_dir = os.path.join(os.path.expanduser("~"), name, "logs")
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    log_file = os.path.join(log_dir, "app.log")
 
-    if app_theme == "dark":
-        app_palette.setColor(QPalette.Window, QColor(53, 53, 53))
-        app_palette.setColor(QPalette.WindowText, Qt.white)
-        app_palette.setColor(QPalette.Base, QColor(35, 35, 35))
-        app_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-        app_palette.setColor(QPalette.Text, Qt.white)
-        app_palette.setColor(QPalette.Button, QColor(53, 53, 53))
-        app_palette.setColor(QPalette.ButtonText, Qt.white)
-        app_palette.setColor(QPalette.BrightText, Qt.red)
-        app_palette.setColor(QPalette.Link, QColor(42, 130, 218))
-        app_palette.setColor(QPalette.Highlight, QColor(42, 183, 66))
-        app_palette.setColor(QPalette.HighlightedText, Qt.white)
-        app_palette.setColor(QPalette.Active, QPalette.Button, QColor(53, 53, 53))
-        app_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
-        app_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
-        app_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
-        app_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(53, 53, 53))
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler(log_file, encoding='utf-8'),
+            logging.StreamHandler(sys.stdout)
+        ]
+    )
+
+def is_dark_theme(app):
+    color_scheme = app.styleHints().colorScheme()
+    return color_scheme == Qt.ColorScheme.Dark
+
+def customize_palette(app, is_dark):
+    palette = app.palette()
+
+    if is_dark:
+        highlight_color = QColor(0, 128, 0)
+        highlighted_text_color = QColor(255, 255, 255)
     else:
-        app_palette = QPalette()
-        app_palette.setColor(QPalette.Highlight, QColor(109, 215, 123))
-        app_palette.setColor(QPalette.HighlightedText, Qt.black)
+        highlight_color = QColor(144, 238, 144)
+        highlighted_text_color = QColor(0, 0, 0)
 
-    app.setPalette(app_palette)
+    palette.setColor(QPalette.Highlight, highlight_color)
+    palette.setColor(QPalette.HighlightedText, highlighted_text_color)
 
-if __name__ == '__main__':    
-    settings = QSettings("deeffest", name)
-    app_theme = settings.value("app_theme", "dark")
+    app.setPalette(palette)
 
-    app = QApplication(sys.argv + (['-platform', 'windows:darkmode=1'] if app_theme == "dark" else []))
+if __name__ == "__main__":
+    setup_logging()
+
+    app = QApplication(sys.argv)
+    app.setApplicationName(name)
+    app.setApplicationVersion(version)
+    app.setOrganizationName(author)
+    app.setOrganizationDomain(website)
     app.setStyle("Fusion")
-    set_app_palette()
+
+    is_dark = is_dark_theme(app)
+    customize_palette(app, is_dark)
 
     image_path = None
-    for arg in sys.argv[1:]:
-        image_path = arg
-        break
+    if len(sys.argv) > 1:
+        image_path = sys.argv[1]
 
-    main_window = MainWindow(
-        name,
-        version,
-        current_dir,
-        settings,
-        image_path=image_path
-        )
+    window = MainWindow(app, "dark" if is_dark else "light", image_path)
+    window.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

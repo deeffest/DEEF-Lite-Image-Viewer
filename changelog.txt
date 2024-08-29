@@ -1,0 +1,12 @@
+### Update 3.0-beta 🎉 (August 29, 2024)
+
+- A complete rebirth and first 3.0-beta release.
+
+### Update 2.1 🎉 (May 14, 2024)
+- The interface has been redesigned.
+- Added icons to all menu items.
+- Added the ability to rotate the image.
+- The settings window has been added.
+- Added a slide show feature.
+- Added the ability to set an image as your desktop wallpaper.
+- Other fixes and improvements.
