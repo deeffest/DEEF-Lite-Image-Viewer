@@ -1,5 +1,4 @@
 import os
-import locale
 import mimetypes
 import platform
 import ctypes
@@ -12,11 +11,9 @@ from PySide6.QtWidgets import QMainWindow, QMenuBar, QMenu, QStatusBar, \
 from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from PySide6.QtCore import QSettings, Qt, QTimer, QUrl, QEvent, QDateTime
 from PySide6.QtGui import QIcon, QAction, QPixmap, QImage, QTransform, \
-    QImageWriter
+    QImageWriter, QActionGroup
 from core.update_checker import UpdateChecker
 from packaging import version as pkg_version
-
-locale.setlocale(locale.LC_ALL, '') 
 
 class MainWindow(QMainWindow):
     def __init__(self, app, theme, image_path=None, parent=None):
@@ -29,6 +26,14 @@ class MainWindow(QMainWindow):
         self.image_files = []
         self.current_image_index = -1
         self.image = None
+        if self.settings.contains("sort_option"):
+            self.sort_option = self.settings.value("sort_option")
+        else:
+            self.sort_option = "Date"
+        if self.settings.contains("sort_order"):
+            self.sort_order_descending = self.settings.value("sort_order")
+        else:
+            self.sort_order_descending = True
 
         self.setWindowTitle("DEEF Lite Image Viewer")
         self.setObjectName("MainWindow")
@@ -41,8 +46,9 @@ class MainWindow(QMainWindow):
         else:
             self.setWindowIcon(QIcon(":/icons/icon_linux"))
 
-        if self.settings.contains("geometry"):
+        if self.settings.contains("geometry") and self.settings.contains("window_state"):
             self.restoreGeometry(self.settings.value("geometry"))
+            self.restoreState(self.settings.value("window_state"))
         else:
             self.resize(800, 600)
 
@@ -206,12 +212,76 @@ class MainWindow(QMainWindow):
         self.navigation_menu.addAction(self.next_action)
         self.addAction(self.next_action)
 
+        self.navigation_menu.addSeparator()
+
+        self.sort_by_menu = QMenu("Sort by...", self)
+        self.sort_by_menu.setIcon(QIcon(f":/icons/sort_by_{self.theme}"))
+        self.navigation_menu.addMenu(self.sort_by_menu)
+
+        self.sort_by_date_action = QAction("Date", self)
+        self.sort_by_date_action.setCheckable(True)
+        self.sort_by_date_action.triggered.connect(lambda: self.set_sort_option("Date"))
+
+        self.sort_by_name_action = QAction("Name", self)
+        self.sort_by_name_action.setCheckable(True)
+        self.sort_by_name_action.triggered.connect(lambda: self.set_sort_option("Name"))
+
+        self.sort_by_type_action = QAction("Type", self)
+        self.sort_by_type_action.setCheckable(True)
+        self.sort_by_type_action.triggered.connect(lambda: self.set_sort_option("Type"))
+
+        self.sort_by_size_action = QAction("Size", self)
+        self.sort_by_size_action.setCheckable(True)
+        self.sort_by_size_action.triggered.connect(lambda: self.set_sort_option("Size"))
+
+        if self.sort_option == "Date":
+            self.sort_by_date_action.setChecked(True)
+        elif self.sort_option == "Name":
+            self.sort_by_name_action.setChecked(True)
+        elif self.sort_option == "Type":
+            self.sort_by_type_action.setChecked(True)
+        elif self.sort_option == "Size":
+            self.sort_by_size_action.setChecked(True)
+
+        self.sort_ascending_action = QAction("Ascending", self)
+        self.sort_ascending_action.setCheckable(True)
+        self.sort_ascending_action.triggered.connect(lambda: self.set_sort_order(False))
+
+        self.sort_descending_action = QAction("Descending", self)
+        self.sort_descending_action.setCheckable(True)
+        self.sort_descending_action.triggered.connect(lambda: self.set_sort_order(True))
+
+        if self.sort_order_descending:
+            self.sort_descending_action.setChecked(True)
+            self.sort_ascending_action.setChecked(False)
+        else:
+            self.sort_ascending_action.setChecked(True)
+            self.sort_descending_action.setChecked(False)
+
+        self.sort_group = QActionGroup(self)
+        self.sort_group.addAction(self.sort_by_date_action)
+        self.sort_group.addAction(self.sort_by_name_action)
+        self.sort_group.addAction(self.sort_by_type_action)
+        self.sort_group.addAction(self.sort_by_size_action)
+
+        self.order_group = QActionGroup(self)
+        self.order_group.addAction(self.sort_ascending_action)
+        self.order_group.addAction(self.sort_descending_action)
+
+        self.sort_by_menu.addAction(self.sort_by_date_action)
+        self.sort_by_menu.addAction(self.sort_by_name_action)
+        self.sort_by_menu.addAction(self.sort_by_type_action)
+        self.sort_by_menu.addAction(self.sort_by_size_action)
+        self.sort_by_menu.addSeparator()
+        self.sort_by_menu.addAction(self.sort_ascending_action)
+        self.sort_by_menu.addAction(self.sort_descending_action)
+
         self.help_menu = QMenu("Help", self)
         self.menu_bar.addMenu(self.help_menu)
 
         self.search_for_updates_action = QAction("Search for Updates", self)
         self.search_for_updates_action.setIcon(QIcon(f":/icons/search_{self.theme}"))
-        self.search_for_updates_action.triggered.connect(self.search_for_updates)
+        self.search_for_updates_action.triggered.connect(lambda: self.check_updates(manual_check=True))
         self.help_menu.addAction(self.search_for_updates_action)
 
         self.help_menu.addSeparator()
@@ -257,6 +327,7 @@ class MainWindow(QMainWindow):
         self.centralWidget().setAttribute(Qt.WA_TransparentForMouseEvents)
 
         self.tool_bar = QToolBar(self)
+        self.tool_bar.setObjectName("tool_bar")
         self.tool_bar.setFloatable(False)
         self.tool_bar.setMovable(False)
         self.tool_bar.setContextMenuPolicy(Qt.PreventContextMenu)
@@ -290,17 +361,49 @@ class MainWindow(QMainWindow):
         self.tool_bar.addAction(self.clear_scene_action)
 
         self.context_menu = QMenu(self)
-        self.context_menu.addAction(self.open_file_action)
-        self.context_menu.addAction(self.open_url_action)
-        self.context_menu.addSeparator()
-        self.context_menu.addAction(self.copy_image_action)
-        self.context_menu.addAction(self.paste_image_action)
-        self.context_menu.addSeparator()
-        self.context_menu.addAction(self.save_as_action)
-        self.context_menu.addSeparator()
-        self.context_menu.addAction(self.rotate_image_action)
+        self.context_menu.addMenu(self.file_menu)
+        self.context_menu.addMenu(self.view_menu)
+        self.context_menu.addMenu(self.navigation_menu)
+        self.context_menu.addMenu(self.help_menu)
         self.context_menu.addSeparator()
         self.context_menu.addAction(self.full_screen_action)
+        self.context_menu.addAction(self.quit_action)
+
+        self.full_context_menu = QMenu(self)
+
+        self.full_context_menu.addAction(self.open_file_action)
+        self.full_context_menu.addAction(self.open_url_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.copy_image_action)
+        self.full_context_menu.addAction(self.paste_image_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.save_as_action)
+        self.full_context_menu.addAction(self.set_as_wallpaper_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.previous_action)
+        self.full_context_menu.addAction(self.next_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.zoom_in_action)
+        self.full_context_menu.addAction(self.zoom_out_action)
+        self.full_context_menu.addAction(self.rotate_image_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addMenu(self.sort_by_menu)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addMenu(self.scene_color_menu)
+        self.full_context_menu.addAction(self.clear_scene_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.full_screen_action)
+        self.full_context_menu.addSeparator()
+
+        self.full_context_menu.addAction(self.properties_action)
+        self.full_context_menu.addAction(self.quit_action)
 
         self.network_manager = QNetworkAccessManager(self)
         self.network_manager.finished.connect(self.handle_network_data)
@@ -314,7 +417,7 @@ class MainWindow(QMainWindow):
         if self.isFullScreen():
             self.full_mode()
 
-        self.search_for_updates()
+        self.check_updates(manual_check=False)
 
     def is_valid_mime_type(self, file_path):
         mime_type, _ = mimetypes.guess_type(file_path)
@@ -347,26 +450,35 @@ class MainWindow(QMainWindow):
 
     def normalize_path(self, path):
         return path.replace('\\', '/')
+    
+    def set_sort_order(self, descending):
+        self.sort_order_descending = descending
+    
+    def set_sort_option(self, option):
+        self.sort_option = option
+        self.status_bar.showMessage(f"Sort by {option}", 3000)
 
-    def get_files_in_folder(self, folder_path, recursive=False):
+    def get_files_in_folder(self, folder_path):
         files = []
         folder_path = self.normalize_path(os.path.normpath(folder_path))
 
-        if recursive:
-            for root, dirs, file_names in os.walk(folder_path):
-                file_names.sort(key=locale.strxfrm)
-                for file_name in file_names:
-                    file_path = self.normalize_path(os.path.normpath(os.path.join(root, file_name)))
-                    if self.is_valid_mime_type(file_path):
-                        files.append(file_path)
-        else:
-            with os.scandir(folder_path) as entries:
-                entries = sorted(entries, key=lambda e: locale.strxfrm(e.name))
-                for entry in entries:
-                    if entry.is_file():
-                        file_path = self.normalize_path(os.path.normpath(entry.path))
-                        if self.is_valid_mime_type(file_path):
-                            files.append(file_path)
+        with os.scandir(folder_path) as entries:
+            entries = [entry for entry in entries if entry.is_file()]
+
+            if self.sort_option == "Date":
+                entries.sort(key=lambda e: e.stat().st_mtime, reverse=self.sort_order_descending)
+            elif self.sort_option == "Name":
+                entries.sort(key=lambda e: e.name.lower(), reverse=self.sort_order_descending)
+            elif self.sort_option == "Type":
+                entries.sort(key=lambda e: os.path.splitext(e.name)[1], reverse=self.sort_order_descending)
+            elif self.sort_option == "Size":
+                entries.sort(key=lambda e: e.stat().st_size, reverse=self.sort_order_descending)
+
+            for entry in entries:
+                file_path = self.normalize_path(os.path.normpath(entry.path))
+                if self.is_valid_mime_type(file_path):
+                    files.append(file_path)
+
         return files
 
     def load_image(self, source):
@@ -613,30 +725,54 @@ class MainWindow(QMainWindow):
         else:
             self.status_bar.showMessage("This is the last image.", 3000)
 
-    def search_for_updates(self):
-        self.update_checker = UpdateChecker()
+    def check_updates(self, manual_check=False):
+        self.search_for_updates_action.setEnabled(False)
+
+        self.update_checker = UpdateChecker(manual_check)
         self.update_checker.update_checked.connect(self.handle_update_checked)
+        self.update_checker.update_checked_failed.connect(self.handle_update_checked_failed)
         self.update_checker.start()
         
-    def handle_update_checked(self, version, download):
-        if pkg_version.parse(self.app.applicationVersion()) < pkg_version.parse(version):
-            msg_box = QMessageBox.question(self, 
-                "Update Available", 
-                f"A new version {version} is available. Do you want to download it?", 
-                QMessageBox.Yes | QMessageBox.No)
+    def handle_update_checked(self, version, download, manual_check):
+        self.search_for_updates_action.setEnabled(True)
+
+        current_version = pkg_version.parse(self.app.applicationVersion())
+        latest_version = pkg_version.parse(version)
+
+        if current_version < latest_version:
+            msg_box = QMessageBox.question(
+                self,
+                "Update Available",
+                f"A new version {version} is available. Do you want to download it?",
+                QMessageBox.Yes | QMessageBox.No
+            )
             if msg_box == QMessageBox.Yes:
                 webbrowser.open_new_tab(download)
                 self.close()
-    
+        elif manual_check:
+            QMessageBox.information(
+                self,
+                "No Updates",
+                f"You are using the latest version ({self.app.applicationVersion()})."
+            )
+
+    def handle_update_checked_failed(self, error, manual_check):
+        self.search_for_updates_action.setEnabled(True)
+        if manual_check:
+            QMessageBox.critical(self, "Update Check Failed", f"Failed to check for updates: {error}")
+
     def about(self):
         description = (f"<h3>DEEF Lite Image Viewer</h3>"
-            "It is a simple, lightweight and open source cross-platform image viewer based on Qt6.<br><br>"    
-            f"Version: {self.app.applicationVersion()}<br>"
+            "It is a simple, lightweight and open source cross-platform image viewer based on Qt (PySide6).<br><br>"    
+            f"{self.app.applicationVersion()}<br>"
             "Created with ♥ by deeffest, 2023-2024")
-        QMessageBox.about(self, "About app", description)
+        QMessageBox.about(self, "About", description)
 
     def contextMenuEvent(self, event):
-        self.context_menu.exec(event.globalPos())
+        if self.isFullScreen():
+            self.full_context_menu.exec(event.globalPos())
+        else:
+            self.context_menu.exec(event.globalPos())
         return True
     
     def eventFilter(self, obj, event):
@@ -649,6 +785,9 @@ class MainWindow(QMainWindow):
 
     def save_settings(self):
         self.settings.setValue("geometry", self.saveGeometry())
+        self.settings.setValue("window_state", self.saveState())
+        self.settings.setValue("sort_option", self.sort_option)
+        self.settings.setValue("sort_order", self.sort_order_descending)
         self.settings.sync()
 
     def closeEvent(self, event):

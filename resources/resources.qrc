@@ -27,6 +27,7 @@
         <file alias="search_dark">icons/dark/search.png</file>
         <file alias="about_dark">icons/dark/about.png</file>
         <file alias="save_as_dark">icons/dark/save_as.png</file>
+        <file alias="sort_by_dark">icons/dark/sort_by.png</file>
 
         <!-- light icons -->
         <file alias="file_light">icons/light/file.png</file>
@@ -52,6 +53,7 @@
         <file alias="search_light">icons/light/search.png</file>
         <file alias="about_light">icons/light/about.png</file>
         <file alias="save_as_light">icons/light/save_as.png</file>
+        <file alias="sort_by_light">icons/light/sort_by.png</file>
 
         <!-- disabled icons -->
         <file alias="zoom_in_disabled">icons/disabled/zoom_in.png</file>

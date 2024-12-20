@@ -1,5 +1,12 @@
-### Update 3.0-beta 🎉 (August 29, 2024)
+v3.1.0 is Here! (20.12.2024)
+- Manually searching for updates now shows a message box with information about the update not found.
+- The structure of the context menu has been changed.
+- Added more extended context menu for full screen mode.
+- Added the ability to change the sorting of images in a folder.
+- Qt (PySide6) updated to 6.8.1
+- Other minor fixes and improvements.
 
+### Update 3.0-beta 🎉 (August 29, 2024)
 - A complete rebirth and first 3.0-beta release.
 
 ### Update 2.1 🎉 (May 14, 2024)

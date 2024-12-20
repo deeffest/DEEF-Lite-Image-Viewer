@@ -1,72 +1,52 @@
-![icon](https://github.com/user-attachments/assets/3f0581ff-8a77-4485-92c6-3f042fe6ac51)
+![Icon](resources/icons/logo@128x128.png)
 
-## DEEF Lite Image Viewer 🖼️
+# DEEF Lite Image Viewer
+Crosst-platform image viewer that tries to stick to the principles: **fast**, **light**, **open**.
 
-DEEF Lite Image Viewer is a cross-platform image viewer designed for simplicity, lightweight performance, and broad compatibility across Windows and Linux.
+<img src="https://img.shields.io/badge/PySide-6.8.1-blue?color=00B16A" alt="PySide 6.8.1"/> <img src="https://img.shields.io/badge/Python-3.12.3-blue.svg?color=00B16A" alt="Python 3.12.3"/> <img src="https://img.shields.io/badge/Platform-Win32%20|%20Linux-blue?color=00B16A" alt="Platform Win32 | Linux"/>
 
-## ✨ Key Features
-- **Cross-Platform Compatibility**  
-  Runs seamlessly on Windows and Linux.
+## Screenshots
+![Screenshot_1](resources/images/main_window.png)
 
-- **Comprehensive Image Support**  
-  Open a wide range of image formats including JPEG, PNG, BMP, WEBP, and more.
-
-- **Folder Navigation**  
-  Easily navigate with next and previous controls.
-
-- **Drag and Drop Support**  
-  Effortlessly view images by dragging and dropping them into the viewer.
-
-- **Zoom and Rotate**  
-  Adjust zoom levels and rotate images for optimal viewing.
-
-- **Adaptive Interface**  
-  The interface theme adapts to match your operating system's theme.
-
-## 📸 Screenshots
-![Screenshot_1](https://github.com/user-attachments/assets/1fca8850-cbbb-42ff-8035-273759b6fd88)
-
-## 🚀 Getting Started
-### Using builds with executable files
-1. Download the archive for your OS from the releases page: [Latest Release](https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases/latest).
-2. Unzip the archive to any folder.
-3. Navigate to the folder with the unzipped application and run the executable file.
-
-### Using the source code
-1. **Install Python**  
-   Ensure Python is installed on your system. Tested on:
-   - Windows 10 (22H2) with Python 3.11.3 (64-bit).
-   - Windows 11 (23H2) with Python 3.12.5 (64-bit).
-   - Ubuntu (24.04) with Python 3.12.3 (64-bit).
-   - Manjaro (24.0.5).
-   
-   [Download Python](https://www.python.org/downloads/)
-
-2. **Clone the Repository**  
-   Clone the repository to your local machine.
-
-3. **Install Dependencies**  
-   In the project directory, install dependencies with:
+## Quick Start
+### Source Code
+1. **Clone the Repository**  
+   Clone the project repository to your local machine:
+   ```bash
+   git clone https://github.com/deeffest/DEEF-Lite-Image-Viewer.git
    ```
+2. **Navigate to the Project Directory**  
+   Enter the project folder:
+   ```bash
+   cd DEEF-Lite-Image-Viewer
+   ```
+3. **Install Dependencies**  
+   Install the required dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
-
 4. **Run the Application**  
-   Start the application with:
-   ```
+   Start the DLIViewer:
+   ```bash
    python main.py
    ```
 
-## 🔗 References
-- **Qt:** [Learn More](https://www.qt.io/)
-- **PySide:** [Learn More](https://www.qt.io/qt-for-python)
-- **GitHub Issues:** [Report Issues](https://github.com/deeffest/DEEF-Lite-Image-Viewer/issues/new/choose)
+### Ready-to-Use Builds
+1. **Download the Latest Release**  
+   Get the latest version for your OS from the [Releases page](https://github.com/deeffest/DEEF-Lite-Image-Viewer/releases/latest).
 
-## 📚 See Also
-- **DEEF Lite Media Player:** [Explore](https://github.com/deeffest/DEEF-Lite-Media-Player)
-- **YouTube Music Desktop Player:** [Explore](https://github.com/deeffest/Youtube-Music-Desktop-Player)
+2. **Extract the Archive**  
+   Unzip the downloaded archive to a location of your choice.
 
-## 📜 License
-DEEF Lite Image Viewer is distributed under the **GPLv3 license**.
+3. **Run the Application**  
+   Open the extracted folder, then run the executable file to start the DLIViewer.
 
-**Please let us know if you have any questions or suggestions.**
+## See also
+- [deeffest/DEEF-Lite-Media-Player](https://github.com/deeffest/DEEF-Lite-Media-Player)：Сross-platform media player. 
+- [deeffest/Youtube-Music-Desktop-Player](https://github.com/deeffest/Youtube-Music-Desktop-Player): Turns the YT Music site into a desktop application. 
+- [deeffest/Qt-Multimedia-Player](https://github.com/deeffest/Qt-Multimedia-Player):  Turns Qt's Media Player Example into a complete application. 
+
+## License
+The DEEF Lite Image Viewer is distributed under the **GPLv3 license**.
+
+**We’d love to hear your questions or suggestions!** 💬
