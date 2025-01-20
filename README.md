@@ -1,9 +1,9 @@
-![Icon](resources/icons/logo@128x128.png)
+<img src="resources/icons/logo.png" width="128" height="128">
 
 # DEEF Lite Image Viewer
 Crosst-platform image viewer that tries to stick to the principles: **fast**, **light**, **open**.
 
-<img src="https://img.shields.io/badge/PySide-6.8.1-blue?color=00B16A" alt="PySide 6.8.1"/> <img src="https://img.shields.io/badge/Python-3.12.3-blue.svg?color=00B16A" alt="Python 3.12.3"/> <img src="https://img.shields.io/badge/Platform-Win32%20|%20Linux-blue?color=00B16A" alt="Platform Win32 | Linux"/>
+<img src="https://img.shields.io/badge/PySide-6.8.1.1-blue?color=00B16A" alt="PySide 6.8.1.1"/> <img src="https://img.shields.io/badge/Python-3.12.3-blue.svg?color=00B16A" alt="Python 3.12.3"/> <img src="https://img.shields.io/badge/Platform-Win32%20|%20Linux-blue?color=00B16A" alt="Platform Win32 | Linux"/>
 
 ## Screenshots
 ![Screenshot_1](resources/images/main_window.png)
@@ -28,7 +28,7 @@ Crosst-platform image viewer that tries to stick to the principles: **fast**, **
 4. **Run the Application**  
    Start the DLIViewer:
    ```bash
-   python main.py
+   python DLIViewer.py
    ```
 
 ### Ready-to-Use Builds
@@ -42,9 +42,9 @@ Crosst-platform image viewer that tries to stick to the principles: **fast**, **
    Open the extracted folder, then run the executable file to start the DLIViewer.
 
 ## See also
-- [deeffest/DEEF-Lite-Media-Player](https://github.com/deeffest/DEEF-Lite-Media-Player)：Сross-platform media player. 
+- [deeffest/DEEF-Lite-Media-Player](https://github.com/deeffest/DEEF-Lite-Media-Player): Сross-platform media player. 
 - [deeffest/Youtube-Music-Desktop-Player](https://github.com/deeffest/Youtube-Music-Desktop-Player): Turns the YT Music site into a desktop application. 
-- [deeffest/Qt-Multimedia-Player](https://github.com/deeffest/Qt-Multimedia-Player):  Turns Qt's Media Player Example into a complete application. 
+- [deeffest/Qt-Multimedia-Player](https://github.com/deeffest/Qt-Multimedia-Player): Media Player Example from doc.qt.io with fixes. 
 
 ## License
 The DEEF Lite Image Viewer is distributed under the **GPLv3 license**.
