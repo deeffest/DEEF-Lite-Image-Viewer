@@ -42,8 +42,7 @@ Crosst-platform image viewer that tries to stick to the principles: **fast**, **
    Open the extracted folder, then run the executable file to start the DLIViewer.
 
 ## See also
-- [deeffest/DEEF-Lite-Media-Player](https://github.com/deeffest/DEEF-Lite-Media-Player): Сross-platform media player. 
-- [deeffest/Youtube-Music-Desktop-Player](https://github.com/deeffest/Youtube-Music-Desktop-Player): Turns the YT Music site into a desktop application. 
+- [deeffest/DEEF-Lite-Media-Player](https://github.com/deeffest/DEEF-Lite-Media-Player): Сross-platform media player.
 
 ## License
 The DEEF Lite Image Viewer is distributed under the **GPLv3 license**.
